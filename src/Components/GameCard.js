@@ -1,15 +1,19 @@
-import React, { useState, useRef }from 'react';
+import React, { useRef }from 'react';
 
-export default function GameCard({gameCard}) {
-    const [flip, setFlip] = useState(true)
-
+export default function GameCard({gameCard, gameLogic}) {
     const frontEl = useRef()
     const backEl = useRef()
 
+    const handleClick = () => {
+        let updatedCard = {...gameCard, flip: false}
+        gameLogic(updatedCard)
+
+    }
+    
     return (
         <div 
-            className={`gameCard ${flip ? 'flip' : ''}`}
-            onClick={() => setFlip(!flip)}
+            className={`gameCard ${gameCard.flip ? 'flip' : ''}`}
+            onClick={handleClick}
         >
             <div className="front" ref={frontEl}>
                 <img className="gameCard-img" src={gameCard.front} alt="front"/>
