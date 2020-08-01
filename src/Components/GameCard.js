@@ -1,13 +1,12 @@
 import React, { useRef }from 'react';
 
-export default function GameCard({gameCard, gameLogic}) {
+export default function GameCard({gameCard, gameLogic, flipCards}) {
     const frontEl = useRef()
     const backEl = useRef()
 
     const handleClick = () => {
         let updatedCard = {...gameCard, flip: false}
         gameLogic(updatedCard)
-
     }
     
     return (

@@ -38,11 +38,12 @@ export default function GameCardList({deck, setDeck}) {
         setPair('')
     }
 
+    const renderDeck = () => deck.map(gameCard => <GameCard key={gameCard.id} gameCard={gameCard} gameLogic={gameLogic}/>)
+    
+
     return (
         <div className="gameCard-grid">
-            {deck.map(gameCard => {
-                return <GameCard key={gameCard.id} gameCard={gameCard} gameLogic={gameLogic}/>
-            })}
+            {renderDeck()}
         </div>
     )
 }
