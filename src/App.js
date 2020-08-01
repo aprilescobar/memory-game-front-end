@@ -7,37 +7,25 @@ const App = () => {
   const card1 = require('./Visuals/card1.png')
   const card2 = require('./Visuals/card2.png')
   const gameDeck  = [
-    { id: 1, front: card1, back: cardBack},
-    { id: 2, front: card1, back: cardBack},
-    { id: 3, front: card2, back: cardBack},
-    { id: 4, front: card2, back: cardBack},
-    { id: 5, front: card1, back: cardBack},
-    { id: 6, front: card1, back: cardBack},
-    { id: 7, front: card2, back: cardBack},
-    { id: 8, front: card2, back: cardBack},
-    { id: 9, front: card1, back: cardBack},
-    { id: 10, front: card1, back: cardBack},
-    { id: 11, front: card2, back: cardBack},
-    { id: 12, front: card2, back: cardBack}
+    { id: 1, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 2, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 3, name:'card2', front: card2, back: cardBack, flip: true},
+    { id: 4, name:'card2', front: card2, back: cardBack, flip: true},
+    { id: 5, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 6, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 7, name:'card2', front: card2, back: cardBack, flip: true},
+    { id: 8, name:'card2', front: card2, back: cardBack, flip: true},
+    { id: 9, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 10, name:'card1', front: card1, back: cardBack, flip: true},
+    { id: 11, name:'card2', front: card2, back: cardBack, flip: true},
+    { id: 12, name:'card2', front: card2, back: cardBack, flip: true}
   ]
 
-  const [deck] = useState(gameDeck)
-
-  // const id = 1
-  
-  // // const click = () => {
-  //   const cardId = id
-  //   const updated = (deck.map(card => card.id === cardId ? {...card, clicked: !card.clicked} : card))
-  //   setDeck(updated)
-  // }
-
-  // const thisCard = () => {
-  //   return deck.find(card => card.id === id)
-  // }
+  const [deck, setDeck] = useState(gameDeck)
 
   return (
     <div className="game-container">
-      <GameCardList list={deck}/>
+      <GameCardList deck={deck} setDeck={setDeck} />
     </div>
   );
 }
