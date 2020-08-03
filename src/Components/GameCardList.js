@@ -2,22 +2,32 @@ import React, { useState } from 'react'
 import GameCard from './GameCard.js'
 
 export default function GameCardList({deck, setDeck}) {
-    const matches = []
+    const [matches, setMatches] = useState([])
     const [pair, setPair] = useState('')
 
     const gameLogic = (gameCard) => {
         updateDeck(gameCard)
-        if(pair){
-            if(gameCard.name === pair.name){
-                matches.push(pair.id, gameCard.id)
-                setPair('')
-            } else {
-                setTimeout(() => {
-                    resetDeck(gameCard);
-                }, 500);
+        if(matches.includes(gameCard.id)){
+            setPair(pair)
+        } else {
+            if(pair && pair.id !== gameCard.id){
+                if(gameCard.name === pair.name){
+                    if(matches.length > 0 && matches.length  === deck.length -2){
+                        setTimeout(() => {
+                            youWon()
+                        }, 200);
+                    } else {
+                        setMatches([...matches, gameCard.id, pair.id])
+                        setPair('')
+                    }
+                } else {
+                    setTimeout(() => {
+                        resetDeck(gameCard);
+                    }, 500);
+                }
+            } else{
+                setPair(gameCard)
             }
-        } else{
-            setPair(gameCard)
         }
     }
 
@@ -34,7 +44,7 @@ export default function GameCardList({deck, setDeck}) {
     const resetDeck = gameCard => {
         const reset = deck.map(card => {
             if(card.id === gameCard.id || card.id === pair.id){
-                return {...card, flip: true}
+                return {...card, flip: true, disable: false}
             } else {
                 return card
             }
@@ -43,16 +53,22 @@ export default function GameCardList({deck, setDeck}) {
         setPair('')
     }
 
-    const renderDeck = () => deck.map(gameCard => <GameCard 
+    const youWon = () => {
+        alert("you won")
+    }
+
+    const renderDeck = () => deck.map(gameCard => (
+        <GameCard 
         key={gameCard.id} 
         gameCard={gameCard} 
         gameLogic={gameLogic} 
         flipCards={flipCards}/>)
+    )
     
-
     return (
         <div className="gameCard-grid">
             {renderDeck()}
+            {console.log(pair)}
         </div>
     )
 }

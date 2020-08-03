@@ -12,7 +12,7 @@ export default function GameCard({gameCard, gameLogic, flipCards}) {
     }, [])
 
     const handleClick = () => {
-        let updatedCard = {...gameCard, flip: false}
+        let updatedCard = {...gameCard, flip: false, disable: true}
         gameLogic(updatedCard)
     }
     
@@ -20,6 +20,7 @@ export default function GameCard({gameCard, gameLogic, flipCards}) {
         <div 
             className={`gameCard ${gameCard.flip ? 'flip' : ''}`}
             onClick={handleClick}
+            disabled={true}
         >
             <div className="front" ref={frontEl}>
                 <img className="gameCard-img" src={gameCard.front} alt="front"/>
