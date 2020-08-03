@@ -21,6 +21,11 @@ export default function GameCardList({deck, setDeck}) {
         }
     }
 
+    const flipCards = () => {
+        const updated = deck.map(card => ({...card, flip: true}))
+        setDeck(updated)
+    }
+
     const updateDeck = gameCard => {
         const updated = deck.map(card => card.id === gameCard.id ? gameCard : card)
         setDeck(updated)
@@ -38,7 +43,11 @@ export default function GameCardList({deck, setDeck}) {
         setPair('')
     }
 
-    const renderDeck = () => deck.map(gameCard => <GameCard key={gameCard.id} gameCard={gameCard} gameLogic={gameLogic}/>)
+    const renderDeck = () => deck.map(gameCard => <GameCard 
+        key={gameCard.id} 
+        gameCard={gameCard} 
+        gameLogic={gameLogic} 
+        flipCards={flipCards}/>)
     
 
     return (

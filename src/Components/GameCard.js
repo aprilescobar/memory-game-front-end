@@ -1,8 +1,15 @@
-import React, { useRef }from 'react';
+import React, { useRef, useEffect }from 'react';
 
 export default function GameCard({gameCard, gameLogic, flipCards}) {
     const frontEl = useRef()
     const backEl = useRef()
+
+    useEffect(() => {
+        setTimeout(() => {
+            flipCards()
+        }, 3000)
+        // eslint-disable-next-line
+    }, [])
 
     const handleClick = () => {
         let updatedCard = {...gameCard, flip: false}
